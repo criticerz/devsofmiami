@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220050135) do
+ActiveRecord::Schema.define(version: 20160220050213) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username"
@@ -28,7 +28,10 @@ ActiveRecord::Schema.define(version: 20160220050135) do
     t.integer  "following"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "user_id"
   end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
