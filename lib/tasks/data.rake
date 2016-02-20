@@ -45,7 +45,12 @@ task :update_profiles => :environment do
 end
 
 task :update_languages => :environment do
-  Profile.each do |profile|
+  client = ENV['DEV_GITHUB_CLIENT']
+  secret = ENV['DEV_GITHUB_SECRET']
+  Profile.find_each do |profile|
+    username = profile.username
+    response = HTTParty.get("https://api.github.com/users/#{username}/repos?client_id=#{client}&client_secret=#{secret}")
+    
   end
 end
 
