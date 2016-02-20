@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 20160220050213) do
     t.string   "blog",         limit: 255
     t.string   "location",     limit: 255
     t.boolean  "hireable"
+    t.string   "email"
+    t.string   "bio"
+    t.integer  "public_repos"
+    t.integer  "public_gists"
+    t.integer  "followers"
+    t.integer  "following"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
     t.string   "email",        limit: 255
     t.string   "bio",          limit: 255
     t.integer  "public_repos", limit: 4

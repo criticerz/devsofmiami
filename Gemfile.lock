@@ -75,6 +75,9 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.3)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     hub (1.12.4)
     i18n (0.7.0)
     interception (0.5)
@@ -213,6 +216,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   dotenv-rails
   foreman
+  httparty
   hub
   jbuilder (~> 2.0)
   jquery-rails

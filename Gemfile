@@ -6,6 +6,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
+gem 'httparty'
 group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'
@@ -24,7 +25,7 @@ group :development do
   gem 'foreman'
   gem 'hub', :require=>nil
   gem 'rails_layout'
-  gem 'sqlite3'
+  # gem 'sqlite3'
 end
 group :development, :test do
   gem 'pry-rails'
