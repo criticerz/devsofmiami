@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220081312) do
+ActiveRecord::Schema.define(version: 20160220092557) do
+
+  create_table "languages", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profile_languages", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "language_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "profile_languages", ["language_id"], name: "index_profile_languages_on_language_id"
+  add_index "profile_languages", ["profile_id"], name: "index_profile_languages_on_profile_id"
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username"
