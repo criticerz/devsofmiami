@@ -35,7 +35,7 @@ task :update_profiles => :environment do
   Profile.find_each do |profile|
     begin
       username = profile.username
-      response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}?client_id=375c84879ebf62fbd53d&client_secret=06063a17ab8290116377f9436f0337a5d6710a9d"))
+      response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}?client_id=#{ENV['DEV_GITHUB_CLIENT']}&client_secret=#{ENV['DEV_GITHUB_SECRET']}"))
       profile = Profile.where(username: username).last
       p response['login']
       profile.avatar_url = response['avatar_url']
