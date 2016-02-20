@@ -51,6 +51,8 @@ task :update_languages => :environment do
     username = profile.username
     response = HTTParty.get("https://api.github.com/users/#{username}/repos?client_id=#{client}&client_secret=#{secret}")
     
+    p response.body['language']
+
   end
 end
 
