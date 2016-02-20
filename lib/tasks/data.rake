@@ -48,11 +48,24 @@ task :update_languages => :environment do
   client = ENV['DEV_GITHUB_CLIENT']
   secret = ENV['DEV_GITHUB_SECRET']
   Profile.find_each do |profile|
-    username = profile.username
-    response = HTTParty.get("https://api.github.com/users/#{username}/repos?client_id=#{client}&client_secret=#{secret}")
-    
-    p response.body['language']
-
+    begin
+      username = profile.username
+      response = HTTParty.get("https://api.github.com/users/#{username}/repos?client_id=#{client}&client_secret=#{secret}")
+      
+      parsed_response = JSON.parse(response.body)
+      if parsed_response[0]
+        language = parsed_response[0]['language']
+        unless language.blank?
+          find_language = Language.where(name: language).first_or_create()
+          p find_language
+          profile_language = ProfileLanguage.create(profile_id: profile.id, language_id: find_language.id)
+        end
+      end
+    rescue => e
+      p "An error occurred: #{e}"
+    end
   end
 end
+
+
 
