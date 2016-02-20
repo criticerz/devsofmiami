@@ -13,6 +13,15 @@
 
 ActiveRecord::Schema.define(version: 20160220092557) do
 
+  create_table "code_wars_data", force: :cascade do |t|
+    t.string   "username"
+    t.string   "honor"
+    t.string   "languages"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "challenges_completed"
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
