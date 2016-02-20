@@ -2,8 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+main {
+  margin-top: 71px;
+}
+
 .profile-thumb {
-  margin-top: 30px;
+  margin-bottom: 30px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -20,3 +24,48 @@
   line-height: 50px;
   text-align: center;
 }
+.profile-thumb .profile-info {
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.61);
+  width: 90%;
+  height: 263px;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  color: #fff;
+  // opacity: 0;
+}
+.profile-thumb:hover .profile-info {
+  opacity: 1;
+}
+.profile-thumb .source a i {
+  font-size: 40px;
+  color: #fff;
+}
+.profile-thumb .source span.public-repos, .profile-thumb .source span.followers {
+  display: inline-block;
+  text-align: center;
+  font-size: 10px;
+  margin-right: 20px;
+}
+.profile-thumb .source a, .profile-thumb .source a {
+  display: inline-block;
+  margin-right: 15px;
+}
+.profile-thumb .source a:hover, .profile-thumb .source a:hover {
+  opacity: 0.5;
+  background-color: transparent;
+  text-decoration: none;
+}
+.profile-thumb .source span.public-repos strong, .profile-thumb .source span.followers strong {
+  display: block;
+  font-size: 17px;
+}
+.profile-thumb .source-codewars {
+  margin-top: 15px;
+  border-top: 1px solid rgba(204, 204, 204, 0.13);
+  padding-top: 20px;
+}
+
+
+
