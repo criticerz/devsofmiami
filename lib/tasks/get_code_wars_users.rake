@@ -6,6 +6,12 @@ task get_code_wars_users: :environment do
     response = HTTParty.get("https://www.codewars.com/api/v1/users/#{profile.username}").to_json
     parsed_response = JSON.parse(response)
 
-    CodeWarsDatum.where(username: profile.username).first_or_create(username: parsed_response["username"], honor: parsed_response["honor"], languages: parsed_response["ranks"]["languages"].keys, challenges_completed: parsed_response["codeChallenges"]["totalCompleted"])
+    if parsed_response["success"] == false
+      next
+    else
+      languages = parsed_response["ranks"]["languages"].keys
+    end
+
+    CodeWarsDatum.where(username: profile.username).first_or_create(username: parsed_response["username"], honor: parsed_response["honor"], languages: languages, challenges_completed: parsed_response["codeChallenges"]["totalCompleted"])
   end
 end
