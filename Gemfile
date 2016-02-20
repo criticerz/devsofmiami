@@ -25,7 +25,7 @@ group :development do
   gem 'foreman'
   gem 'hub', :require=>nil
   gem 'rails_layout'
-  # gem 'sqlite3'
+  gem 'sqlite3'
 end
 group :development, :test do
   gem 'pry-rails'
