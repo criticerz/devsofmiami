@@ -11,14 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220041235) do
+ActiveRecord::Schema.define(version: 20160220050135) do
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "username"
+    t.string   "name"
+    t.string   "company"
+    t.string   "blog"
+    t.string   "location"
+    t.boolean  "hireable"
+    t.string   "email"
+    t.string   "bio"
+    t.integer  "public_repos"
+    t.integer  "public_gists"
+    t.integer  "followers"
+    t.integer  "following"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "provider",   limit: 255
-    t.string   "uid",        limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
