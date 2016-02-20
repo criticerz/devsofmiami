@@ -13,7 +13,7 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 gem 'mysql2', '~> 0.3.18'
 gem 'omniauth'
 gem 'omniauth-github'
