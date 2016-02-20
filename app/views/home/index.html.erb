@@ -1,2 +1,24 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="container">
+
+  <% (1..4).each do |i| %>
+
+    <div class="row">
+      
+      <% (1..4).each do |n| %>
+        
+        <div class="col-md-3">
+          <div class="profile-thumb">
+            <img src="https://avatars3.githubusercontent.com/u/1427752?v=3&s=400" alt="" />  
+            <div class="languages">
+              <i class="devicon-ruby-plain-wordmark"></i>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+
+    </div>
+
+  <% end %>
+
+</div>
