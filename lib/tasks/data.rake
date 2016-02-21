@@ -78,6 +78,7 @@ task :update_languages => :environment do
 end
 
 task :import_stack_data => :environment do
+  # we can automate getting this data later
   CSV.foreach('QueryResults.csv', :headers => true) do |row|
     begin
       p row["DisplayName"] + ": " + row["Reputation"]
@@ -87,6 +88,24 @@ task :import_stack_data => :environment do
       StackProfile.create!(display_name: display_name, reputation: reputation, location: location)
     rescue => e
       p "an error occurred: #{e}"
+    end
+  end
+end
+
+task :find_matches => :environment do
+  Profile.find_each do |profile|
+    match_name = StackProfile.where(display_name: profile.name)
+    match_username = StackProfile.where(display_name: profile.username)
+    if match_name.length == 1
+      p "display name: #{match_name.last.display_name}"
+      p "profile name: #{profile.name}"
+      match_name.last.profile_id = profile.id
+      match_name.last.save
+    elsif match_username.length == 1
+      p "display name: #{match_username.last.display_name}"
+      p "profile name: #{profile.username}"
+      match_username.last.profile_id = profile.id
+      match_username.last.save
     end
   end
 end
