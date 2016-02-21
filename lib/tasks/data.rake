@@ -1,4 +1,5 @@
 require 'httparty'
+require 'csv'
 
 task :create_profiles => :environment do
   i = 0
@@ -72,6 +73,20 @@ task :update_languages => :environment do
       end
     rescue => e
       p "An error occurred: #{e}"
+    end
+  end
+end
+
+task :import_stack_data => :environment do
+  CSV.foreach('QueryResults.csv', :headers => true) do |row|
+    begin
+      p row["DisplayName"] + ": " + row["Reputation"]
+      display_name = row["DisplayName"]
+      reputation = row["Reputation"].to_i
+      location = row["Location"]
+      StackProfile.create!(display_name: display_name, reputation: reputation, location: location)
+    rescue => e
+      p "an error occurred: #{e}"
     end
   end
 end
