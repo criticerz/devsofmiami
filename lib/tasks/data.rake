@@ -2,20 +2,23 @@ require 'httparty'
 
 task :create_profiles => :environment do
   i = 0
-  response = HTTParty.get(URI.encode("https://api.github.com/search/users?q=+location:Miami&per_page=100&page=1"))
-  p "count: #{response.length}"
-  response.each do |user|
-
-    begin
-      p user[1].count
-      p "users: #{user[1]}"
-      user[1].each do |u|
-        p "usernames: #{u['login']}"
-        profile = Profile.create!(username: u['login'])
+  page = 1
+  while page < 20
+    response = HTTParty.get(URI.encode("https://api.github.com/search/users?q=+location:Miami&per_page=100&page=#{page}"))
+    p "count: #{response.length}"
+    response.each do |user|
+      begin
+        p user[1].count
+        p "users: #{user[1]}"
+        user[1].each do |u|
+          p "usernames: #{u['login']}"
+          profile = Profile.where(username: u['login']).first_or_create
+        end
+      rescue => e
+        p "there was an error: #{e}"
       end
-    rescue => e
-      p "there was an error: #{e}"
     end
+    page += 1
   end
 end
 
@@ -24,20 +27,26 @@ task :update_profiles => :environment do
   secret = ENV['DEV_GITHUB_SECRET']
   Profile.find_each do |profile|
     begin
+      # next if profile.id < 100
       username = profile.username
       response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}?client_id=#{client}&client_secret=#{secret}"))
+      p "response: #{response.inspect}"
       profile = Profile.where(username: username).last
-      p response['login']
-      profile.avatar_url = response['avatar_url']
-      profile.hireable = response['hireable']
-      profile.company = response['company']
-      profile.bio = response['bio']
-      profile.public_repos = response['public_repos']
-      profile.public_gists = response['public_gists']
-      profile.followers = response['followers']
-      profile.following = response['following']
-      profile.location = response['location']
-      profile.save
+      unless response['login'].blank?
+        p response['login']
+        profile.avatar_url = response['avatar_url']
+        profile.hireable = response['hireable']
+        profile.company = response['company']
+        profile.bio = response['bio']
+        profile.public_repos = response['public_repos']
+        profile.public_gists = response['public_gists']
+        profile.followers = response['followers']
+        profile.following = response['following']
+        profile.location = response['location']
+        profile.save
+      else
+        next
+      end
     rescue => e
       p "there was an error: #{e}"
     end
