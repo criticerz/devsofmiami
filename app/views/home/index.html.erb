@@ -1,2 +1,98 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="container">
+
+  <!-- <div class="row">
+    <form action="/" method="get">
+      
+      <div class="col-md-3">
+
+        <select id="language" name="language" class="form-control">
+          <option value="">Any Language</option>
+          <option value="ActionScript">ActionScript</option>
+          <option value="C">C</option>
+          <option value="C#">C#</option>
+          <option value="C++">C++</option>
+          <option value="Clojure">Clojure</option>
+          <option value="CoffeeScript">CoffeeScript</option>
+          <option value="CSS">CSS</option>
+          <option value="Go">Go</option>
+          <option value="Haskell">Haskell</option>
+          <option value="HTML">HTML</option>
+          <option value="Java">Java</option>
+          <option value="JavaScript">JavaScript</option>
+          <option value="Lua">Lua</option>
+          <option value="Matlab">Matlab</option>
+          <option value="Objective-C">Objective-C</option>
+          <option value="Perl">Perl</option>
+          <option value="PHP">PHP</option>
+          <option value="Python">Python</option>
+          <option value="R">R</option>
+          <option value="Ruby">Ruby</option>
+          <option value="Scala">Scala</option>
+          <option value="Shell">Shell</option>
+          <option value="Swift">Swift</option>
+          <option value="TeX">TeX</option>
+          <option value="VimL">VimL</option>
+        </select>
+
+      </div>
+
+    </form>
+  </div> -->
+
+  <div class="row">
+    
+    <% @profiles.each do |profile| %>
+      
+      <div class="col-md-3">
+        <div class="profile-thumb">
+          <img src="<%= profile.avatar_url %>" alt="" />
+          <div class="profile-info">
+            
+            <div class="source source-github">
+              
+              <a href="https://github.com/<%= profile.username %>">
+                <i class="devicon-github-plain"></i>
+              </a>
+              
+              <span class="public-repos">
+                <strong><%= profile.public_repos %></strong>
+                PUBLIC REPOS
+              </span>
+
+              <span class="followers">
+                <strong><%= profile.followers %></strong>
+                FOLLOWERS
+              </span>
+
+            </div>
+
+            <div class="source source-codewars">
+              
+              <a href="https://github.com/<%= profile.username %>">
+                <img src="<%= image_path('codewars-logo.jpg') %>" alt="" style="width: 40px;" />
+              </a>
+              
+              <span class="public-repos">
+                <strong><%= profile.public_repos %></strong>
+                PUBLIC REPOS
+              </span>
+
+              <span class="followers">
+                <strong><%= profile.followers %></strong>
+                FOLLOWERS
+              </span>
+
+            </div>
+
+          </div>
+          <div class="languages">
+            <i class="devicon-ruby-plain-wordmark"></i>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>
