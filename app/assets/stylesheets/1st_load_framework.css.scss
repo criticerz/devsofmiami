@@ -80,3 +80,7 @@ section {
   @extend .btn-primary;
   @extend .btn-xs;
 }
+
+a:hover, a:focus {
+  text-decoration: none;
+}

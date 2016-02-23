@@ -1,5 +1,9 @@
+<% if false # alain: commented this out for simplicity.. %>
+
 <% if user_signed_in? %>
   <li><%= link_to 'Sign out', signout_path %></li>
 <% else %>
   <li><%= link_to "Sign in with Github", "/auth/github" %></li>
+<% end %>
+
 <% end %>

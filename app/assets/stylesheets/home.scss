@@ -3,16 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 main {
-  margin-top: 71px;
+  margin-top: 51px;
+  padding-top: 30px;
 }
 
 .profile-thumb {
   margin-bottom: 30px;
   border-radius: 10px;
   overflow: hidden;
+  min-height: 313px;
+}
+.profile-thumb .profile-pic {
+  width: 100%;
+  height: 263px;
+  text-align: center;
 }
 .profile-thumb img {
   max-width: 100%;
+  vertical-align: middle;
 }
 .profile-thumb .languages {
   bottom: 0;
@@ -23,6 +31,10 @@ main {
   font-size: 34px;
   line-height: 50px;
   text-align: center;
+  padding-top: 3px;
+}
+.profile-thumb .languages a:hover {
+  opacity: 0.5;
 }
 .profile-thumb .profile-info {
   position: absolute;
@@ -47,10 +59,15 @@ main {
   text-align: center;
   font-size: 10px;
   margin-right: 20px;
+  vertical-align: top;
 }
 .profile-thumb .source a, .profile-thumb .source a {
   display: inline-block;
   margin-right: 15px;
+}
+.profile-thumb .source.source-codewars a img {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
 }
 .profile-thumb .source a:hover, .profile-thumb .source a:hover {
   opacity: 0.5;
@@ -61,11 +78,47 @@ main {
   display: block;
   font-size: 17px;
 }
-.profile-thumb .source-codewars {
-  margin-top: 15px;
+.profile-thumb .source {
+  margin-bottom: 15px;
   border-top: 1px solid rgba(204, 204, 204, 0.13);
-  padding-top: 20px;
+  padding-top: 15px;
 }
 
+.profile-desc {
+  text-align: center;
+  height: 50px;
+}
+.profile-desc span.username {
+  display: block;
+  font-size: 16px;
+}
+.profile-desc span.company {
+  color: #9d9d9d;
+}
 
+.profile-pagination {
+  text-align: center;
+}
 
+.languages-nav {
+  text-align: center;
+  padding: 10px;
+}
+.languages-nav a, .languages-nav a:visited {
+  font-size: 40px;
+  margin: 0px 3px;
+  padding: 5px 10px 0;
+  text-align: center;
+  display: inline-block;
+}
+.languages-nav a:hover {
+  background-color: transparent;
+  text-decoration: none;
+}
+.languages-nav a:hover, .languages-nav a.active {
+  background-color: #FFF;
+  border-radius: 5px;
+}
+.languages-nav a.active {
+  border: 1px solid #EEE;
+}
