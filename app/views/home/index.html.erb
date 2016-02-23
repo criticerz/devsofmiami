@@ -75,7 +75,7 @@
           </div>
           <div class="languages">
             <% profile.languages.where('slug IS NOT NULL').each do |language| %>
-              <a href="/language=<%= language.slug %>">
+              <a href="/?language=<%= language.slug %>">
                 <i class="<%= language.icon_class %> colored"></i>
               </a>
             <% end %>
