@@ -117,5 +117,35 @@ task :find_matches => :environment do
   end
 end
 
+task :get_latest_github_activities => :environment do
+  
+  client = ENV['DEV_GITHUB_CLIENT']
+  secret = ENV['DEV_GITHUB_SECRET']
 
+  Profile.find_each do |profile|
+    begin
+      # next if profile.id < 100
+      username = profile.username
+      response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}/events/public?client_id=#{client}&client_secret=#{secret}"))
+      
+      if response.count == 0
+        puts "user had no profile activity"
+        next
+      end
+
+      latest_activity_at = response.first['created_at']
+
+      if latest_activity_at.present?
+
+        profile.latest_github_activity_at = latest_activity_at.to_datetime
+        profile.save
+        puts "updated latest activity for #{profile.id}"
+
+      end
+      
+    rescue => e
+      p "there was an error: #{e}"
+    end
+  end
+end
 

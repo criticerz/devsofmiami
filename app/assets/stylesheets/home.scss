@@ -119,16 +119,26 @@ body {
 }
 .profile-desc span.company {
   color: #9d9d9d;
+  font-size: 11px;
 }
 
 .profile-pagination {
   text-align: center;
 }
 
+p.ordered-by {
+  text-align: center;
+  margin: 0 0 20px 0;
+  padding: 0;
+  font-style: italic;
+  font-size: 12px;
+  color: #cccccc;
+}
+
 .languages-nav {
   text-align: center;
   padding: 10px;
-  margin: 10px 0 30px;
+  margin: 10px 0 20px;
 }
 .languages-nav a, .languages-nav a:visited {
   font-size: 40px;

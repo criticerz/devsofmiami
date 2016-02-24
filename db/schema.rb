@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223050902) do
+ActiveRecord::Schema.define(version: 20160224045900) do
 
   create_table "code_wars_data", force: :cascade do |t|
     t.string   "username",             limit: 255
@@ -44,22 +44,23 @@ ActiveRecord::Schema.define(version: 20160223050902) do
   add_index "profile_languages", ["profile_id"], name: "index_profile_languages_on_profile_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "username",     limit: 255
-    t.string   "name",         limit: 255
-    t.string   "company",      limit: 255
-    t.string   "blog",         limit: 255
-    t.string   "location",     limit: 255
+    t.string   "username",                  limit: 255
+    t.string   "name",                      limit: 255
+    t.string   "company",                   limit: 255
+    t.string   "blog",                      limit: 255
+    t.string   "location",                  limit: 255
     t.boolean  "hireable"
-    t.string   "email",        limit: 255
-    t.string   "bio",          limit: 255
-    t.integer  "public_repos", limit: 4
-    t.integer  "public_gists", limit: 4
-    t.integer  "followers",    limit: 4
-    t.integer  "following",    limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "user_id",      limit: 4
-    t.string   "avatar_url",   limit: 255
+    t.string   "email",                     limit: 255
+    t.string   "bio",                       limit: 255
+    t.integer  "public_repos",              limit: 4
+    t.integer  "public_gists",              limit: 4
+    t.integer  "followers",                 limit: 4
+    t.integer  "following",                 limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "user_id",                   limit: 4
+    t.string   "avatar_url",                limit: 255
+    t.datetime "latest_github_activity_at"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
