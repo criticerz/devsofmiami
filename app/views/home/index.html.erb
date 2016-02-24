@@ -30,7 +30,7 @@
           <div class="profile-info">
 
             <div class="profile-desc">
-              <span class="username">@<%= profile.username %></span>
+              <a href="https://github.com/<%= profile.username %>" target="_blank" class="username">@<%= profile.username %></a>
               <% if profile.company %>
                 <span class="company"><%= profile.company %></span>
               <% end %>

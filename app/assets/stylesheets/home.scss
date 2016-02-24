@@ -113,13 +113,15 @@ body {
   text-align: center;
   height: 50px;
 }
-.profile-desc span.username {
+.profile-desc a.username {
   display: block;
   font-size: 16px;
+  color: #fff;
 }
 .profile-desc span.company {
   color: #9d9d9d;
   font-size: 11px;
+  // display: block;
 }
 .profile-info span.latest-activity {
   position: absolute;
