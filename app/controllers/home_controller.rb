@@ -12,7 +12,7 @@ class HomeController < ApplicationController
       
     end
 
-    @languages = Language.where('slug IS NOT NULL').order('name ASC')
+    @languages = Language.where('icon_class IS NOT NULL').order('name ASC')
 
   end
 end
