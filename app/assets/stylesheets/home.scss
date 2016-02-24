@@ -137,6 +137,13 @@ body {
   text-align: center;
   display: inline-block;
 }
+.languages-nav a span.count {
+  display: block;
+  font-size: 10px;
+  color: #95a5a6;
+  line-height: 2px;
+  padding-bottom: 12px;
+}
 .languages-nav a:hover {
   background-color: transparent;
   text-decoration: none;

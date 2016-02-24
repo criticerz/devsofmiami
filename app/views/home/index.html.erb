@@ -6,6 +6,7 @@
         <% @languages.each do |language| %>
           <a href="/?language=<%= language.slug %>" class="<%= 'active' if language.slug == params[:language] %>">
             <i class="<%= language.icon_class %> colored"></i>
+            <span class="count"><%= language.profiles.count %></span>
           </a>
         <% end %>
       </div>
@@ -74,7 +75,7 @@
 
           </div>
           <div class="languages">
-            <% profile.languages.where('slug IS NOT NULL').each do |language| %>
+            <% profile.languages.each do |language| %>
               <a href="/?language=<%= language.slug %>">
                 <i class="<%= language.icon_class %> colored"></i>
               </a>
