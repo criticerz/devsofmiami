@@ -11,7 +11,7 @@
         <% end %>
       </div>
 
-      <p class="ordered-by">Ordered by lastest public activity on Github.</p>
+      <p class="ordered-by">Ordered by lastest public activity on Github, updated hourly.</p>
 
     </div>
   </div>
@@ -74,6 +74,10 @@
 
               </div>
 
+            <% end %>
+  
+            <% if profile.latest_github_activity_at.present? %>
+              <span class="latest-activity">last active <%= time_ago_in_words(profile.latest_github_activity_at) %> ago..</span>
             <% end %>
 
           </div>

@@ -121,6 +121,17 @@ body {
   color: #9d9d9d;
   font-size: 11px;
 }
+.profile-info span.latest-activity {
+  position: absolute;
+  bottom: 9px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding-right: 20px;
+  font-size: 10px;
+  color: #999999;
+  font-style: italic;
+}
 
 .profile-pagination {
   text-align: center;
