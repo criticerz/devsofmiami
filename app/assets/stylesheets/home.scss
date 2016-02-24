@@ -3,9 +3,34 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 main {
-  margin-top: 51px;
-  padding-top: 30px;
+  margin-top: 0;
+  padding-top: 0;
 }
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #2c3e50;
+  color: #fff;
+  
+  text-align: center;
+  padding-top: 21px;
+}
+
+/* HOME */
 
 .profile-thumb {
   margin-bottom: 30px;
@@ -26,7 +51,7 @@ main {
   bottom: 0;
   left: 0;
   height: 50px;
-  background-color: #FFF;
+  background-color: #ecf0f1;
   color: #777;
   font-size: 34px;
   line-height: 50px;
@@ -103,6 +128,7 @@ main {
 .languages-nav {
   text-align: center;
   padding: 10px;
+  margin: 10px 0 30px;
 }
 .languages-nav a, .languages-nav a:visited {
   font-size: 40px;

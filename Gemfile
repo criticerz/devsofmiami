@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'httparty'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'meta-tags'
 
 group :development, :test do
   gem 'byebug'
