@@ -17,12 +17,12 @@
   </div>
 
   <div class="row">
-    
+
     <% @profiles.each do |profile| %>
-      
+
       <div class="col-md-3">
         <div class="profile-thumb">
-          
+
           <div class="profile-pic">
             <img src="<%= profile.avatar_url %>" alt="" />
           </div>
@@ -35,13 +35,13 @@
                 <span class="company"><%= profile.company %></span>
               <% end %>
             </div>
-            
+
             <div class="source source-github">
-              
+
               <a href="https://github.com/<%= profile.username %>" target="_blank">
                 <i class="devicon-github-plain"></i>
               </a>
-              
+
               <span class="public-repos">
                 <strong><%= profile.public_repos %></strong>
                 PUBLIC REPOS
@@ -57,11 +57,11 @@
             <% if profile.code_wars_datum.present? %>
 
               <div class="source source-codewars">
-                
+
                 <a href="http://www.codewars.com/users/<%= profile.code_wars_datum.username %>" target="_blank">
                   <img src="<%= image_path('codewars-logo.jpg') %>" alt="" style="width: 40px;" />
                 </a>
-                
+
                 <span class="public-repos">
                   <strong><%= profile.code_wars_datum.honor %></strong>
                   HONOR
