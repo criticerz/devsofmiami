@@ -26,11 +26,18 @@
 
           <div class="profile-info">
 
-            <div class="profile-desc">
+            <div class="profile-desc <%= 'missing-company' if profile.company.blank? %>">
+              
               <a href="https://github.com/<%= profile.username %>" target="_blank" class="username">@<%= profile.username %></a>
+              
               <% if profile.company %>
                 <span class="company"><%= profile.company %></span>
               <% end %>
+
+              <% if profile.github_created_at.present? %>
+                <span class="joined-github">joined Github <%= time_ago_in_words(profile.github_created_at) %> ago</span>
+              <% end %>
+
             </div>
 
             <div class="source source-github">

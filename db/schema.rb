@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224045900) do
+ActiveRecord::Schema.define(version: 20160225055300) do
 
   create_table "code_wars_data", force: :cascade do |t|
     t.string   "username",             limit: 255
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160224045900) do
     t.integer  "user_id",                   limit: 4
     t.string   "avatar_url",                limit: 255
     t.datetime "latest_github_activity_at"
+    t.datetime "github_created_at"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree

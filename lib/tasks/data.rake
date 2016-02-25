@@ -31,8 +31,9 @@ task :update_profiles => :environment do
       # next if profile.id < 100
       username = profile.username
       response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}?client_id=#{client}&client_secret=#{secret}"))
+      
       p "response: #{response.inspect}"
-      profile = Profile.where(username: username).last
+      
       unless response['login'].blank?
         p response['login']
         profile.avatar_url = response['avatar_url']
@@ -44,10 +45,12 @@ task :update_profiles => :environment do
         profile.followers = response['followers']
         profile.following = response['following']
         profile.location = response['location']
+        profile.github_created_at = response['created_at']
         profile.save
       else
         next
       end
+
     rescue => e
       p "there was an error: #{e}"
     end

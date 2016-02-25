@@ -112,7 +112,11 @@ body {
 
 .profile-desc {
   text-align: center;
-  height: 50px;
+  padding-bottom: 10px;
+  min-height: 70px;
+}
+.profile-desc.missing-company {
+  padding-top: 10px;
 }
 .profile-desc a.username {
   display: block;
@@ -120,9 +124,15 @@ body {
   color: #fff;
 }
 .profile-desc span.company {
-  color: #9d9d9d;
+  color: #b4bcc2;
+  font-size: 12px;
+}
+.profile-desc span.joined-github {
   font-size: 11px;
-  // display: block;
+  display: block;
+  color: #9d9d9d;
+  margin-top: 2px;
+  font-style: italic;
 }
 .profile-info span.latest-activity {
   position: absolute;
