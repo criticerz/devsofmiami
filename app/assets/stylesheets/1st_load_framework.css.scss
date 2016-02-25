@@ -7036,7 +7036,11 @@ img {
 
 .navbar-header {
   text-align: center;
-  width: 100%;
+}
+@media(min-width:768px){
+  .navbar-header {
+    width: 100%;
+  }
 }
 .navbar-brand {
   margin: 0 auto;

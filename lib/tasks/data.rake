@@ -118,6 +118,8 @@ task :find_matches => :environment do
 end
 
 task :get_latest_github_activities => :environment do
+
+  # Profile.update_all(:latest_github_activity_at => nil)
   
   client = ENV['DEV_GITHUB_CLIENT']
   secret = ENV['DEV_GITHUB_SECRET']
@@ -133,13 +135,21 @@ task :get_latest_github_activities => :environment do
         next
       end
 
-      latest_activity_at = response.first['created_at']
+      puts "going to loop through user #{profile.id} events.."
 
-      if latest_activity_at.present?
+      # loop through latest events until it finds a push event
+      response.each do |event|
 
-        profile.latest_github_activity_at = latest_activity_at.to_datetime
-        profile.save
-        puts "updated latest activity for #{profile.id}"
+        if event['type'] == 'PushEvent' and event['created_at'].present?
+
+          # only update profile if it's a push event
+          profile.latest_github_activity_at = event['created_at'].to_datetime
+          profile.save
+          puts "updated latest activity for #{profile.id}"
+
+          break # got the latest date.. move on to next person
+
+        end
 
       end
       

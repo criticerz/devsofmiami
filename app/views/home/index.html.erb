@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 
   <div class="row">
     <div class="col-xs-12">
@@ -11,7 +11,7 @@
         <% end %>
       </div>
 
-      <p class="ordered-by">Ordered by lastest public activity on Github, updated hourly.</p>
+      <p class="ordered-by">Ordered by lastest public code pushed to Github, updated hourly.</p>
 
     </div>
   </div>
@@ -20,12 +20,8 @@
     
     <% @profiles.each do |profile| %>
       
-      <div class="col-md-3">
-        <div class="profile-thumb">
-          
-          <div class="profile-pic">
-            <img src="<%= profile.avatar_url %>" alt="" />
-          </div>
+      <div class="col-md-3 col-sm-4">
+        <div class="profile-thumb" style="background-image: url('<%= profile.avatar_url %>');">
 
           <div class="profile-info">
 
@@ -77,7 +73,7 @@
             <% end %>
   
             <% if profile.latest_github_activity_at.present? %>
-              <span class="latest-activity">last active <%= time_ago_in_words(profile.latest_github_activity_at) %> ago..</span>
+              <span class="latest-activity">pushed code <%= time_ago_in_words(profile.latest_github_activity_at) %> ago..</span>
             <% end %>
 
           </div>
