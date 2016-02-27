@@ -89,13 +89,19 @@ end
 
 task :import_stack_data => :environment do
   # we can automate getting this data later
-  CSV.foreach('QueryResults.csv', :headers => true) do |row|
+  CSV.foreach('stackoverflow2_27_16.csv', :headers => true) do |row|
     begin
       p row["DisplayName"] + ": " + row["Reputation"]
       display_name = row["DisplayName"]
       reputation = row["Reputation"].to_i
       location = row["Location"]
-      StackProfile.create!(display_name: display_name, reputation: reputation, location: location)
+      stack_profile = StackProfile.where(display_name: display_name)
+      unless stack_profile.blank?
+        stack_profile.first.reputation = reputation
+        stack_profile.first.save
+      else
+        StackProfile.create(display_name: display_name, reputation: reputation, location: location)
+      end
     rescue => e
       p "an error occurred: #{e}"
     end
