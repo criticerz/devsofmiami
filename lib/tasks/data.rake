@@ -31,8 +31,9 @@ task :update_profiles => :environment do
       # next if profile.id < 100
       username = profile.username
       response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}?client_id=#{client}&client_secret=#{secret}"))
+      
       p "response: #{response.inspect}"
-      profile = Profile.where(username: username).last
+      
       unless response['login'].blank?
         p response['login']
         profile.avatar_url = response['avatar_url']
@@ -44,10 +45,12 @@ task :update_profiles => :environment do
         profile.followers = response['followers']
         profile.following = response['following']
         profile.location = response['location']
+        profile.github_created_at = response['created_at']
         profile.save
       else
         next
       end
+
     rescue => e
       p "there was an error: #{e}"
     end
@@ -55,15 +58,15 @@ task :update_profiles => :environment do
 end
 
 task :update_languages => :environment do
-  
+
   client = ENV['DEV_GITHUB_CLIENT']
   secret = ENV['DEV_GITHUB_SECRET']
-  
+
   Profile.find_each do |profile|
     begin
       username = profile.username
       response = HTTParty.get("https://api.github.com/users/#{username}/repos?client_id=#{client}&client_secret=#{secret}")
-      
+
       repos = JSON.parse(response.body)
 
       repos.each do |repo|
@@ -117,5 +120,45 @@ task :find_matches => :environment do
   end
 end
 
+task :get_latest_github_activities => :environment do
 
+  # Profile.update_all(:latest_github_activity_at => nil)
+  
+  client = ENV['DEV_GITHUB_CLIENT']
+  secret = ENV['DEV_GITHUB_SECRET']
+
+  Profile.find_each do |profile|
+    begin
+      # next if profile.id < 100
+      username = profile.username
+      response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}/events/public?client_id=#{client}&client_secret=#{secret}"))
+      
+      if response.count == 0
+        puts "user had no profile activity"
+        next
+      end
+
+      puts "going to loop through user #{profile.id} events.."
+
+      # loop through latest events until it finds a push event
+      response.each do |event|
+
+        if event['type'] == 'PushEvent' and event['created_at'].present?
+
+          # only update profile if it's a push event
+          profile.latest_github_activity_at = event['created_at'].to_datetime
+          profile.save
+          puts "updated latest activity for #{profile.id}"
+
+          break # got the latest date.. move on to next person
+
+        end
+
+      end
+      
+    rescue => e
+      p "there was an error: #{e}"
+    end
+  end
+end
 

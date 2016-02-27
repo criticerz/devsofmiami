@@ -2,11 +2,12 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Devsofmiami" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Devsofmiami" %>">
+    
+    <%= display_meta_tags site: 'Miami Developers: Find all active developers in Miami' %>
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/master/devicon.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
@@ -23,6 +24,22 @@
       <%= yield %>
 
     </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Made with <i class="fa fa-heart"></i> by <a href="http://twitter.com/toddmetheny" target="_blank">@toddmetheny</a>, <a href="http://twitter.com/raybraaf" target="_blank">@raybraaf</a> &amp; <a href="http://twitter.com/alainfv" target="_blank">@alainfv</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-74260312-1', 'auto');
+      ga('send', 'pageview');
+    </script>
 
   </body>
 </html>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 
   <div class="row">
     <div class="col-xs-12">
@@ -6,46 +6,54 @@
         <% @languages.each do |language| %>
           <a href="/?language=<%= language.slug %>" class="<%= 'active' if language.slug == params[:language] %>">
             <i class="<%= language.icon_class %> colored"></i>
+            <span class="count"><%= language.profiles.count %></span>
           </a>
         <% end %>
       </div>
+
+      <p class="ordered-by">Ordered by lastest public code pushed to Github, updated hourly.</p>
+
     </div>
   </div>
 
   <div class="row">
-    
+
     <% @profiles.each do |profile| %>
-      
-      <div class="col-md-3">
-        <div class="profile-thumb">
-          
-          <div class="profile-pic">
-            <img src="<%= profile.avatar_url %>" alt="" />
-          </div>
+
+
+      <div class="col-md-3 col-sm-4">
+        <div class="profile-thumb" style="background-image: url('<%= profile.avatar_url %>');">
 
           <div class="profile-info">
 
-            <div class="profile-desc">
-              <span class="username">@<%= profile.username %></span>
+            <div class="profile-desc <%= 'missing-company' if profile.company.blank? %>">
+              
+              <a href="https://github.com/<%= profile.username %>" target="_blank" class="username">@<%= profile.username %></a>
+              
               <% if profile.company %>
                 <span class="company"><%= profile.company %></span>
               <% end %>
+
+              <% if profile.github_created_at.present? %>
+                <span class="joined-github">joined Github <%= time_ago_in_words(profile.github_created_at) %> ago</span>
+              <% end %>
+
             </div>
-            
+
             <div class="source source-github">
-              
+
               <a href="https://github.com/<%= profile.username %>" target="_blank">
                 <i class="devicon-github-plain"></i>
               </a>
-              
+
               <span class="public-repos">
                 <strong><%= profile.public_repos %></strong>
-                PUBLIC REPOS
+                PUBLIC <%= 'repo'.pluralize(profile.public_repos).upcase %>
               </span>
 
               <span class="followers">
                 <strong><%= profile.followers %></strong>
-                FOLLOWERS
+                <%= 'follower'.pluralize(profile.followers).upcase %>
               </span>
 
             </div>
@@ -53,11 +61,11 @@
             <% if profile.code_wars_datum.present? %>
 
               <div class="source source-codewars">
-                
+
                 <a href="http://www.codewars.com/users/<%= profile.code_wars_datum.username %>" target="_blank">
                   <img src="<%= image_path('codewars-logo.jpg') %>" alt="" style="width: 40px;" />
                 </a>
-                
+
                 <span class="public-repos">
                   <strong><%= profile.code_wars_datum.honor %></strong>
                   HONOR
@@ -65,16 +73,20 @@
 
                 <span class="followers">
                   <strong><%= profile.code_wars_datum.challenges_completed %></strong>
-                  CHALLENGES DONE
+                  <%= 'challenge'.pluralize(profile.code_wars_datum.challenges_completed).upcase %> DONE
                 </span>
 
               </div>
 
             <% end %>
+  
+            <% if profile.latest_github_activity_at.present? %>
+              <span class="latest-activity">pushed code <%= time_ago_in_words(profile.latest_github_activity_at) %> ago..</span>
+            <% end %>
 
           </div>
           <div class="languages">
-            <% profile.languages.where('slug IS NOT NULL').each do |language| %>
+            <% profile.languages.each do |language| %>
               <a href="/?language=<%= language.slug %>">
                 <i class="<%= language.icon_class %> colored"></i>
               </a>
