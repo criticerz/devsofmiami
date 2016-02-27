@@ -14,34 +14,34 @@
 ActiveRecord::Schema.define(version: 20160225055300) do
 
   create_table "code_wars_data", force: :cascade do |t|
-    t.string   "username",             limit: 255
-    t.string   "honor",                limit: 255
-    t.string   "languages",            limit: 255
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.string   "challenges_completed", limit: 255
-    t.integer  "profile_id",           limit: 4
+    t.string   "username"
+    t.string   "honor"
+    t.string   "languages"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "challenges_completed"
+    t.integer  "profile_id"
   end
 
-  add_index "code_wars_data", ["profile_id"], name: "index_code_wars_data_on_profile_id", using: :btree
+  add_index "code_wars_data", ["profile_id"], name: "index_code_wars_data_on_profile_id"
 
   create_table "languages", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "slug",       limit: 255
-    t.string   "icon_class", limit: 255
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+    t.string   "icon_class"
   end
 
   create_table "profile_languages", force: :cascade do |t|
-    t.integer  "profile_id",  limit: 4
-    t.integer  "language_id", limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "profile_id"
+    t.integer  "language_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "profile_languages", ["language_id"], name: "index_profile_languages_on_language_id", using: :btree
-  add_index "profile_languages", ["profile_id"], name: "index_profile_languages_on_profile_id", using: :btree
+  add_index "profile_languages", ["language_id"], name: "index_profile_languages_on_language_id"
+  add_index "profile_languages", ["profile_id"], name: "index_profile_languages_on_profile_id"
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",                  limit: 255
@@ -64,32 +64,27 @@ ActiveRecord::Schema.define(version: 20160225055300) do
     t.datetime "github_created_at"
   end
 
-  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
   create_table "stack_profiles", force: :cascade do |t|
-    t.string   "display_name", limit: 255
-    t.integer  "reputation",   limit: 4
-    t.string   "location",     limit: 255
-    t.integer  "user_id",      limit: 4
-    t.integer  "profile_id",   limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "display_name"
+    t.integer  "reputation"
+    t.string   "location"
+    t.integer  "user_id"
+    t.integer  "profile_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "stack_profiles", ["profile_id"], name: "index_stack_profiles_on_profile_id", using: :btree
-  add_index "stack_profiles", ["user_id"], name: "index_stack_profiles_on_user_id", using: :btree
+  add_index "stack_profiles", ["profile_id"], name: "index_stack_profiles_on_profile_id"
+  add_index "stack_profiles", ["user_id"], name: "index_stack_profiles_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "provider",   limit: 255
-    t.string   "uid",        limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "profile_languages", "languages"
-  add_foreign_key "profile_languages", "profiles"
-  add_foreign_key "profiles", "users"
-  add_foreign_key "stack_profiles", "profiles"
-  add_foreign_key "stack_profiles", "users"
 end
