@@ -1,6 +1,7 @@
 require 'httparty'
 require 'csv'
 
+# splitting the api calls
 task :create_profiles => :environment do
   i = 0
   page = 1
@@ -19,6 +20,27 @@ task :create_profiles => :environment do
         p "there was an error: #{e}"
       end
     end
+    page += 1
+  end
+end
+
+task :create_the_rest => :environment do
+  page = 10
+  while page < 11
+    response = HTTParty.get(URI.encode("https://api.github.com/search/users?q=+location:Miami&per_page=100&page=#{page}"))
+    
+    response.each do |user|
+      begin
+        user[1].each do |u|
+          p "usernames: #{u['login']}"
+          profile = Profile.where(username: u['login']).first_or_create
+        end
+      rescue => e
+        p "there was an error: #{e}"
+      end
+    end
+    puts "page: #{page}"
+    sleep(5)
     page += 1
   end
 end
