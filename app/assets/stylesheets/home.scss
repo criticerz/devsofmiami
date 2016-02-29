@@ -63,6 +63,16 @@ body {
   text-align: center;
   padding-top: 3px;
 }
+.profile-thumb .languages .show-all-languages {
+  display: inline-block;
+  vertical-align: top;
+  margin: 6px 0 0 2px;
+  background-color: #ECF0F1;
+  border-color: #FFFFFF;
+  color: #C3C3C3;
+  border-width: 1px;
+  outline: none;
+}
 .profile-thumb .languages a:hover {
   opacity: 0.5;
 }
