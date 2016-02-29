@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <%= display_meta_tags site: 'Miami Developers: Find all active developers in Miami' %>
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -13,14 +13,14 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    
+
     <header>
       <%= render 'layouts/navigation' %>
     </header>
 
     <main role="main">
       <%= render 'layouts/messages' %>
-       
+
       <%= yield %>
 
     </main>
