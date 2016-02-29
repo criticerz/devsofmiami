@@ -2,7 +2,7 @@ require 'httparty'
 require 'csv'
 
 # task combo
-task :github_create_and_update
+task :github_create_and_update => :environment do
   Profile.create_from_github
   Profile.update_from_github
 end
