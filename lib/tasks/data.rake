@@ -32,9 +32,9 @@ task :create_profiles => :environment do
         page += 1
         p "page: #{page}"
       end
-      sleep(1)
+      sleep(2)
     end
-    sleep(1)
+    sleep(3)
   end
 end
 
@@ -125,7 +125,7 @@ end
 
 task :import_stack_data => :environment do
   # we can automate getting this data later
-  CSV.foreach('stackoverflow2_27_16.csv', :headers => true) do |row|
+  CSV.foreach('stack_overflow_2_28_16.csv', :headers => true) do |row|
     begin
       p row["DisplayName"] + ": " + row["Reputation"]
       display_name = row["DisplayName"]
