@@ -7,6 +7,23 @@ task :github_create_and_update => :environment do
   Profile.update_from_github
 end
 
+task :update_name_from_github => :environment do
+  client = ENV['DEV_GITHUB_CLIENT']
+  secret = ENV['DEV_GITHUB_SECRET']
+
+  Profile.find_each do |profile|
+    begin
+      username = profile.username
+      response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}?client_id=#{client}&client_secret=#{secret}"))
+      p "name: #{response['name']}"
+      profile.name = response['name']
+      profile.save
+    rescue => e
+      p "an error occurred: #{e}"
+    end
+  end
+end
+
 # splitting the api calls
 task :create_profiles => :environment do
   client = ENV['DEV_GITHUB_CLIENT']
@@ -42,7 +59,7 @@ task :create_the_rest => :environment do
   page = 10
   while page < 11
     response = HTTParty.get(URI.encode("https://api.github.com/search/users?q=+location:Miami&per_page=100&page=#{page}"))
-    
+
     response.each do |user|
       begin
         user[1].each do |u|
@@ -67,9 +84,9 @@ task :update_profiles => :environment do
       # next if profile.id < 100
       username = profile.username
       response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}?client_id=#{client}&client_secret=#{secret}"))
-      
+
       p "response: #{response.inspect}"
-      
+
       unless response['login'].blank?
         p response['login']
         profile.avatar_url = response['avatar_url']
@@ -165,7 +182,7 @@ end
 task :get_latest_github_activities => :environment do
 
   # Profile.update_all(:latest_github_activity_at => nil)
-  
+
   client = ENV['DEV_GITHUB_CLIENT']
   secret = ENV['DEV_GITHUB_SECRET']
 
@@ -174,7 +191,7 @@ task :get_latest_github_activities => :environment do
       # next if profile.id < 100
       username = profile.username
       response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}/events/public?client_id=#{client}&client_secret=#{secret}"))
-      
+
       if response.count == 0
         puts "user had no profile activity"
         next
@@ -197,10 +214,9 @@ task :get_latest_github_activities => :environment do
         end
 
       end
-      
+
     rescue => e
       p "there was an error: #{e}"
     end
   end
 end
-
