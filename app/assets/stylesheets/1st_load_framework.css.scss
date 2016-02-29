@@ -7034,22 +7034,19 @@ img {
   margin: 0 auto;
 }
 
-.navbar-header {
-  text-align: center;
-}
-@media(min-width:768px){
-  .navbar-header {
-    width: 100%;
-  }
-}
+// .navbar-header {
+//   text-align: center;
+// }
+// @media(min-width:768px){
+//   .navbar-header {
+//     width: 100%;
+//   }
+// }
 .navbar-brand {
-  margin: 0 auto;
-  float: none;
-  display: inline-block;
   font-weight: bold;
-  font-size: 26px;
+  font-size: 22px;
   padding: 0 10px;
-  line-height: 58px;
+  line-height: 61px;
 }
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
