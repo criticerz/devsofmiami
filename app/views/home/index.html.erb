@@ -128,11 +128,20 @@
 
           </div>
           <div class="languages">
-            <% profile.languages.each do |language| %>
+            <% profile.languages.limit(4).each do |language| %>
               <a href="/?language=<%= language.slug %>">
                 <i class="<%= language.icon_class %> colored"></i>
               </a>
             <% end %>
+
+            <% if profile.languages.count > 4 %>
+            
+              <button type="button" class="btn btn-sm btn-default show-all-languages" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus"  data-content="<%= profile.languages.pluck(:name).join(', ') %>">
+                more
+              </button>
+
+            <% end %>
+
           </div>
         </div>
       </div>

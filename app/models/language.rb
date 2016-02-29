@@ -4,6 +4,8 @@ class Language < ActiveRecord::Base
 
   validates :name, :uniqueness => true
 
+  default_scope { order('name ASC') }
+
   scope :visible, -> { where('icon_class IS NOT NULL') }
 
   def self.update_all_slugs
