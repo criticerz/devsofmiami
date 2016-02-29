@@ -11,8 +11,8 @@ end
 task :create_profiles => :environment do
   client = ENV['DEV_GITHUB_CLIENT']
   secret = ENV['DEV_GITHUB_SECRET']
-  sort_options = ['followers', 'joined', 'repositories']
-  directions = ['asc', 'desc']
+  sort_options = ['repositories', 'joined', 'followers']
+  directions = ['desc', 'asc']
   directions.each do |direction|
     sort_options.each do |option|
       page = 1
