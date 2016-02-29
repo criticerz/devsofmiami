@@ -220,6 +220,16 @@ p.find-yo-self {
   color: #ccc;
 }
 
+span.member-badge {
+  position: absolute;
+  top: 31px;
+  right: 10px;
+  color: #d62c1a;
+}
+span.member-badge i {
+  margin-top: -20px;
+  float: left;
+}
 
 // .languages-nav {
 //   text-align: center;

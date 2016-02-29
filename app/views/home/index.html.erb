@@ -81,6 +81,10 @@
                   <span class="joined-github">joined Github <%= time_ago_in_words(profile.github_created_at) %> ago</span>
                 <% end %>
 
+                <% if profile.user_id.present? %>
+                  <span class="member-badge" data-toggle="tooltip" data-placement="left" title="MiamiDevs member since <%= time_ago_in_words(profile.created_at) %> ago"><i class="fa fa-heart"></i></span>
+                <% end %>
+
               </div>
 
               <div class="source source-github">
@@ -137,7 +141,7 @@
 
               <% if profile.languages.count > 4 %>
               
-                <button type="button" class="btn btn-sm btn-default show-all-languages" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus"  data-content="<%= profile.languages.pluck(:name).join(', ') %>">
+                <button type="button" class="btn btn-sm btn-default show-all-languages" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-html="true" data-content="<%= profile.languages.map {|lang| "<a href='?language=#{lang.slug}'>#{lang.name}</a>"}.join(', ') %>">
                   more
                 </button>
 
