@@ -11,9 +11,31 @@ class Profile < ActiveRecord::Base
   has_one :code_wars_datum
 
   validates :username, uniqueness: true
+  after_create :update_profile_data
 
   @@client = ENV['DEV_GITHUB_CLIENT']
   @@secret = ENV['DEV_GITHUB_SECRET']
+
+  def update_profile_data
+    username = self.username
+    response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}?client_id=#{@@client}&client_secret=#{@@secret}"))
+
+    unless response['login'].blank?
+      p response['login']
+      self.avatar_url = response['avatar_url']
+      self.hireable = response['hireable']
+      self.company = response['company']
+      self.bio = response['bio']
+      self.public_repos = response['public_repos']
+      self.public_gists = response['public_gists']
+      self.followers = response['followers']
+      self.following = response['following']
+      self.location = response['location']
+      self.github_created_at = response['created_at']
+      self.save
+      p "saved"
+    end
+  end
 
   def self.create_from_github
     sort_options = ['followers', 'joined', 'repositories']

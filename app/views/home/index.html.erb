@@ -23,7 +23,7 @@
       <div class="col-sm-5">
 
         <div class="sort-by-filter">
-        
+
           <select name="sort_by" class="form-control" onChange="javascript:this.form.submit();">
             <option value=""<%= ' selected' if params[:sort_by].blank? or params[:sort_by] == 'github-joined' %>>Public Activity</option>
             <option value="github-joined"<%= ' selected' if params[:sort_by] == 'github-joined' %>>Joined Github</option>
@@ -60,7 +60,29 @@
 
   <div class="row">
 
+<<<<<<< HEAD
     <% if @profiles.count > 0 %>
+=======
+    <% @profiles.each do |profile| %>
+
+
+      <div class="col-md-3 col-sm-4">
+        <div class="profile-thumb" style="background-image: url('<%= profile.avatar_url %>');">
+
+          <div class="profile-info">
+
+            <div class="profile-desc <%= 'missing-company' if profile.company.blank? %>">
+
+              <a href="https://github.com/<%= profile.username %>" target="_blank" class="username">@<%= profile.username %></a>
+
+              <% if profile.company %>
+                <span class="company"><%= profile.company %></span>
+              <% end %>
+
+              <% if profile.github_created_at.present? %>
+                <span class="joined-github">joined Github <%= time_ago_in_words(profile.github_created_at) %> ago</span>
+              <% end %>
+>>>>>>> b248185669df7b82c1583a1ec0bc3fa3db022b24
 
       <% @profiles.each do |profile| %>
 
