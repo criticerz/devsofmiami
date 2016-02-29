@@ -18,7 +18,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         
-        <% if user_signed_in? %>
+        <% if current_user.blank? %>
           <li><a href="#" data-toggle="modal" data-target="#become-a-member">Become a Member</a></li>
         <% else %>
           <li><%= link_to 'Sign out', signout_path, class:"btn btn-link" %></li>
@@ -37,7 +37,7 @@
           </div>
           <div class="modal-body text-center">
             
-            <p>Your profile will show a badge showing that you're a member. We still don't know what being a member means, but trust us, it will be awesome.</p>
+            <p>Your profile will show a heart showing that you're a member. We still don't know what being a member means, but trust us, it will be awesome.</p>
 
             <%= render 'layouts/nav_links_for_auth' %>
           </div>

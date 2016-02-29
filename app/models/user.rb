@@ -4,14 +4,30 @@ class User < ActiveRecord::Base
 
   def self.create_with_omniauth(auth)
     create! do |user|
+      
       user.provider = auth['provider']
       user.uid = auth['uid']
+      
+      # create remember token
+      user.create_remember_token
+
       if auth['info']
          user.name = auth['info']['name'] || ""
          user.email ||= auth['info']['email']
          user.username = auth['info']['nickname']
       end
     end
+  end
+
+  def self.add_remember_token_to_all_users
+    User.all.each do |user|
+      user.create_remember_token
+      user.save
+    end
+  end
+
+  def create_remember_token
+    self.remember_token = SecureRandom.urlsafe_base64
   end
 
   private
