@@ -60,90 +60,99 @@
 
   <div class="row">
 
-    <% @profiles.each do |profile| %>
+    <% if @profiles.count > 0 %>
 
+      <% @profiles.each do |profile| %>
 
-      <div class="col-md-3 col-sm-4">
-        <div class="profile-thumb" style="background-image: url('<%= profile.avatar_url %>');">
+        <div class="col-md-3 col-sm-4">
+          <div class="profile-thumb" style="background-image: url('<%= profile.avatar_url %>');">
 
-          <div class="profile-info">
+            <div class="profile-info">
 
-            <div class="profile-desc <%= 'missing-company' if profile.company.blank? %>">
-              
-              <a href="https://github.com/<%= profile.username %>" target="_blank" class="username">@<%= profile.username %></a>
-              
-              <% if profile.company %>
-                <span class="company"><%= profile.company %></span>
-              <% end %>
+              <div class="profile-desc <%= 'missing-company' if profile.company.blank? %>">
+                
+                <a href="https://github.com/<%= profile.username %>" target="_blank" class="username">@<%= profile.username %></a>
+                
+                <% if profile.company %>
+                  <span class="company"><%= profile.company %></span>
+                <% end %>
 
-              <% if profile.github_created_at.present? %>
-                <span class="joined-github">joined Github <%= time_ago_in_words(profile.github_created_at) %> ago</span>
-              <% end %>
+                <% if profile.github_created_at.present? %>
+                  <span class="joined-github">joined Github <%= time_ago_in_words(profile.github_created_at) %> ago</span>
+                <% end %>
 
-            </div>
+              </div>
 
-            <div class="source source-github">
+              <div class="source source-github">
 
-              <a href="https://github.com/<%= profile.username %>" target="_blank">
-                <i class="devicon-github-plain"></i>
-              </a>
-
-              <span class="public-repos">
-                <strong><%= profile.public_repos %></strong>
-                PUBLIC <%= 'repo'.pluralize(profile.public_repos).upcase %>
-              </span>
-
-              <span class="followers">
-                <strong><%= profile.followers %></strong>
-                <%= 'follower'.pluralize(profile.followers).upcase %>
-              </span>
-
-            </div>
-
-            <% if profile.code_wars_datum.present? %>
-
-              <div class="source source-codewars">
-
-                <a href="http://www.codewars.com/users/<%= profile.code_wars_datum.username %>" target="_blank">
-                  <img src="<%= image_path('codewars-logo.jpg') %>" alt="" style="width: 40px;" />
+                <a href="https://github.com/<%= profile.username %>" target="_blank">
+                  <i class="devicon-github-plain"></i>
                 </a>
 
                 <span class="public-repos">
-                  <strong><%= profile.code_wars_datum.honor %></strong>
-                  HONOR
+                  <strong><%= profile.public_repos %></strong>
+                  PUBLIC <%= 'repo'.pluralize(profile.public_repos).upcase %>
                 </span>
 
                 <span class="followers">
-                  <strong><%= profile.code_wars_datum.challenges_completed %></strong>
-                  <%= 'challenge'.pluralize(profile.code_wars_datum.challenges_completed).upcase %> DONE
+                  <strong><%= profile.followers %></strong>
+                  <%= 'follower'.pluralize(profile.followers).upcase %>
                 </span>
 
               </div>
 
-            <% end %>
-  
-            <% if profile.latest_github_activity_at.present? %>
-              <span class="latest-activity">pushed code <%= time_ago_in_words(profile.latest_github_activity_at) %> ago..</span>
-            <% end %>
+              <% if profile.code_wars_datum.present? %>
 
-          </div>
-          <div class="languages">
-            <% profile.languages.limit(4).each do |language| %>
-              <a href="/?language=<%= language.slug %>">
-                <i class="<%= language.icon_class %> colored"></i>
-              </a>
-            <% end %>
+                <div class="source source-codewars">
 
-            <% if profile.languages.count > 4 %>
-            
-              <button type="button" class="btn btn-sm btn-default show-all-languages" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus"  data-content="<%= profile.languages.pluck(:name).join(', ') %>">
-                more
-              </button>
+                  <a href="http://www.codewars.com/users/<%= profile.code_wars_datum.username %>" target="_blank">
+                    <img src="<%= image_path('codewars-logo.jpg') %>" alt="" style="width: 40px;" />
+                  </a>
 
-            <% end %>
+                  <span class="public-repos">
+                    <strong><%= profile.code_wars_datum.honor %></strong>
+                    HONOR
+                  </span>
 
+                  <span class="followers">
+                    <strong><%= profile.code_wars_datum.challenges_completed %></strong>
+                    <%= 'challenge'.pluralize(profile.code_wars_datum.challenges_completed).upcase %> DONE
+                  </span>
+
+                </div>
+
+              <% end %>
+    
+              <% if profile.latest_github_activity_at.present? %>
+                <span class="latest-activity">pushed code <%= time_ago_in_words(profile.latest_github_activity_at) %> ago..</span>
+              <% end %>
+
+            </div>
+            <div class="languages">
+              <% profile.languages.limit(4).each do |language| %>
+                <a href="/?language=<%= language.slug %>">
+                  <i class="<%= language.icon_class %> colored"></i>
+                </a>
+              <% end %>
+
+              <% if profile.languages.count > 4 %>
+              
+                <button type="button" class="btn btn-sm btn-default show-all-languages" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus"  data-content="<%= profile.languages.pluck(:name).join(', ') %>">
+                  more
+                </button>
+
+              <% end %>
+
+            </div>
           </div>
         </div>
+
+      <% end %>
+
+    <% else %>
+
+      <div class="col-xs-12">
+        <p class="text-center find-yo-self">Couldn't find yourself? Sign up to be added to the site!</p>
       </div>
 
     <% end %>
