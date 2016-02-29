@@ -3,24 +3,32 @@ require 'csv'
 
 # splitting the api calls
 task :create_profiles => :environment do
-  i = 0
-  page = 1
-  while page < 20
-    response = HTTParty.get(URI.encode("https://api.github.com/search/users?q=+location:Miami&per_page=100&page=#{page}"))
-    p "count: #{response.length}"
-    response.each do |user|
-      begin
-        p user[1].count
-        p "users: #{user[1]}"
-        user[1].each do |u|
-          p "usernames: #{u['login']}"
-          profile = Profile.where(username: u['login']).first_or_create
+  client = ENV['DEV_GITHUB_CLIENT']
+  secret = ENV['DEV_GITHUB_SECRET']
+  sort_options = ['followers', 'joined', 'repositories']
+  directions = ['asc', 'desc']
+  directions.each do |direction|
+    sort_options.each do |option|
+      page = 1
+      while page < 11
+        response = HTTParty.get(URI.encode("https://api.github.com/search/users?q=+location:Miami&per_page=100&page=#{page}&sort=#{option}&order=#{direction}&client_id=#{client}&client_secret=#{secret}"))
+
+        response.each do |user|
+          begin
+            user[1].each do |u|
+              p "usernames: #{u['login']}"
+              profile = Profile.where(username: u['login']).first_or_create
+            end
+          rescue => e
+            p "there was an error: #{e}"
+          end
         end
-      rescue => e
-        p "there was an error: #{e}"
+        page += 1
+        p "page: #{page}"
       end
+      sleep(1)
     end
-    page += 1
+    sleep(1)
   end
 end
 
