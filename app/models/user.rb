@@ -14,18 +14,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def 
-
   private
 
   def connect_user_with_profile
     profile = Profile.find_by(username: self.username)
-    unless profile.blank?
-      profile.user_id = self.id
-      profile.save
-    else
+    if profile.blank?
       # update_profile_data callback on profile should create rest
       profile = Profile.create(username: self.username, user_id: self.id)
+    else
+      profile.user_id = self.id
+      profile.save
     end
   end
 
