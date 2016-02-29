@@ -86,7 +86,7 @@ task :update_profiles => :environment do
       else
         next
       end
-
+      sleep(1)
     rescue => e
       p "there was an error: #{e}"
     end
