@@ -32,9 +32,9 @@ task :create_profiles => :environment do
         page += 1
         p "page: #{page}"
       end
-      sleep(1)
+      sleep(2)
     end
-    sleep(1)
+    sleep(3)
   end
 end
 
