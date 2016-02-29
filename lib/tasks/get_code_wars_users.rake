@@ -10,7 +10,7 @@ task get_code_wars_users: :environment do
     counter += 1
 
     if counter >= 200
-      sleep 5.minutes
+      sleep 3.minutes
       counter = 0
     end
 
