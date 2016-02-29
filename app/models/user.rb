@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
       profile.save
     else
       # update_profile_data callback on profile should create rest
-      profile = Profile.where(username: self.username).first_or_create
+      profile = Profile.create(username: self.username, user_id: self.id)
     end
   end
 
