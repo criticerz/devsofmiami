@@ -1,6 +1,13 @@
 require 'httparty'
 require 'csv'
 
+# task combo
+task :github_create_and_update
+  Profile.create_from_github
+  Profile.update_from_github
+end
+
+
 # splitting the api calls
 task :create_profiles => :environment do
   client = ENV['DEV_GITHUB_CLIENT']

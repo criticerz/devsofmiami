@@ -13,7 +13,7 @@ class Profile < ActiveRecord::Base
   @@client = ENV['DEV_GITHUB_CLIENT']
   @@secret = ENV['DEV_GITHUB_SECRET']
 
-  def self.create_profiles
+  def self.create_from_github
     sort_options = ['followers', 'joined', 'repositories']
     directions = ['asc', 'desc']
     
@@ -39,9 +39,7 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  def self.update_profiles
-    # client = ENV['DEV_GITHUB_CLIENT']
-    # secret = ENV['DEV_GITHUB_SECRET']
+  def self.update_from_github
     Profile.find_each do |profile|
       begin
         # next if profile.id < 100
