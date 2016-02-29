@@ -17,6 +17,11 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
+.navbar {
+  border-radius: 0;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -159,33 +164,74 @@ p.ordered-by {
   color: #cccccc;
 }
 
-.languages-nav {
-  text-align: center;
+.filter-container {
+  
+}
+.filter-container .language-filter {
+  background-color: #ecf0f1;
   padding: 10px;
-  margin: 10px 0 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
-.languages-nav a, .languages-nav a:visited {
-  font-size: 40px;
-  margin: 0px 3px;
-  padding: 5px 10px 0;
-  text-align: center;
+.filter-container .sort-by-filter {
+  background-color: #ecf0f1;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 20px;
+}
+.filter-container .sort-by-filter select[name="sort_by"] {
   display: inline-block;
+  width: 60%;
 }
-.languages-nav a span.count {
-  display: block;
-  font-size: 10px;
-  color: #95a5a6;
-  line-height: 2px;
-  padding-bottom: 12px;
+.filter-container .sort-by-filter .btn-group {
+  width: 40%;
+  position: absolute;
+  right: 0px;
+  text-align: center;
+  margin-top: 5px;
 }
-.languages-nav a:hover {
-  background-color: transparent;
-  text-decoration: none;
+.filter-container .sort-by-filter .btn-group label.btn {
+  float: none;
 }
-.languages-nav a:hover, .languages-nav a.active {
-  background-color: #FFF;
-  border-radius: 5px;
+.filter-container .sort-by-filter .btn-group label.asc {
+  margin-left: -3px;
 }
-.languages-nav a.active {
-  border: 1px solid #EEE;
+.filter-container .search-by-username {
+  background-color: #ecf0f1;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
+
+
+// .languages-nav {
+//   text-align: center;
+//   padding: 10px;
+//   margin: 10px 0 20px;
+// }
+// .languages-nav a, .languages-nav a:visited {
+//   font-size: 40px;
+//   margin: 0px 3px;
+//   padding: 5px 10px 0;
+//   text-align: center;
+//   display: inline-block;
+// }
+// .languages-nav a span.count {
+//   display: block;
+//   font-size: 10px;
+//   color: #95a5a6;
+//   line-height: 2px;
+//   padding-bottom: 12px;
+// }
+// .languages-nav a:hover {
+//   background-color: transparent;
+//   text-decoration: none;
+// }
+// .languages-nav a:hover, .languages-nav a.active {
+//   background-color: #FFF;
+//   border-radius: 5px;
+// }
+// .languages-nav a.active {
+//   border: 1px solid #EEE;
+// }

@@ -1,19 +1,61 @@
 <div class="container-fluid">
 
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="well languages-nav">
-        <% @languages.each do |language| %>
-          <a href="/?language=<%= language.slug %>" class="<%= 'active' if language.slug == params[:language] %>">
-            <i class="<%= language.icon_class %> colored"></i>
-            <span class="count"><%= language.profiles.count %></span>
-          </a>
-        <% end %>
+  <div class="row filter-container">
+
+    <form action="/" method="get" class="filters">
+      <div class="col-sm-3">
+
+        <div class="language-filter">
+
+          <select name="language" class="form-control" onChange="javascript:this.form.submit();">
+            <option value="">All Languages (<%= Profile.all.count %> devs)</option>
+            <% @languages.each do |language| %>
+              <option value="<%= language.slug %>"<%=' selected' if language.slug == params[:language] %>>
+                <%= language.name %> (<%= language.profiles.count %>)
+              </option>
+            <% end %>
+          </select>
+
+        </div>
+
       </div>
 
-      <p class="ordered-by">Ordered by lastest public code pushed to Github, updated hourly.</p>
+      <div class="col-sm-5">
 
-    </div>
+        <div class="sort-by-filter">
+        
+          <select name="sort_by" class="form-control" onChange="javascript:this.form.submit();">
+            <option value=""<%= ' selected' if params[:sort_by].blank? or params[:sort_by] == 'github-joined' %>>Public Activity</option>
+            <option value="github-joined"<%= ' selected' if params[:sort_by] == 'github-joined' %>>Joined Github</option>
+            <option value="github-followers"<%= ' selected' if params[:sort_by] == 'github-followers' %>>Github Followers</option>
+            <!-- <option value="codewars-honor">Codewars Honor</option> -->
+          </select>
+
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-sm btn-default desc <%= 'active' if params[:sort_order].blank? or params[:sort_order] == 'desc' %>">
+              <input type="radio" name="sort_order" value="desc" onChange="javascript:this.form.submit();"<%= ' checked' if params[:sort_order].blank? or params[:sort_order] == 'desc' %>> DESC
+            </label>
+            <label class="btn btn-sm btn-default asc <%= 'active' if params[:sort_order] == 'asc' %>">
+              <input type="radio" name="sort_order" value="asc" onChange="javascript:this.form.submit();"<%= ' checked' if params[:sort_order] == 'asc' %>> ASC
+            </label>
+          </div>
+
+        </div>
+
+      </div>
+
+    </form>
+
+    <form action="/" method="get" class="filters">
+
+      <div class="col-sm-4">
+        <div class="search-by-username">
+          <input type="text" name="username" placeholder="Search by Github username" class="form-control" value="<%= params[:username] %>" />
+        </div>
+      </div>
+
+    </form>
+
   </div>
 
   <div class="row">
