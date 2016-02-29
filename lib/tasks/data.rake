@@ -2,7 +2,7 @@ require 'httparty'
 require 'csv'
 
 # task combo
-task :github_create_and_update
+task :github_create_and_update => :environment do
   Profile.create_from_github
   Profile.update_from_github
 end
@@ -125,7 +125,7 @@ end
 
 task :import_stack_data => :environment do
   # we can automate getting this data later
-  CSV.foreach('stackoverflow_2_28_16.csv', :headers => true) do |row|
+  CSV.foreach('stack_overflow_2_28_16.csv', :headers => true) do |row|
     begin
       p row["DisplayName"] + ": " + row["Reputation"]
       display_name = row["DisplayName"]
