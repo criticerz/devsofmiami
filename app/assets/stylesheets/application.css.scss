@@ -14,3 +14,18 @@
  *= require_tree .
  *= require_self
  */
+
+/* Header */
+
+/* Github button */
+#myModal > div > div > div.modal-body > a > i {
+  top: 3px;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-footer {
+  border-top: none;
+}

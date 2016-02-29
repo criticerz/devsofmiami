@@ -23,7 +23,7 @@
       <div class="col-sm-5">
 
         <div class="sort-by-filter">
-        
+
           <select name="sort_by" class="form-control" onChange="javascript:this.form.submit();">
             <option value=""<%= ' selected' if params[:sort_by].blank? or params[:sort_by] == 'github-joined' %>>Public Activity</option>
             <option value="github-joined"<%= ' selected' if params[:sort_by] == 'github-joined' %>>Joined Github</option>
@@ -69,9 +69,9 @@
           <div class="profile-info">
 
             <div class="profile-desc <%= 'missing-company' if profile.company.blank? %>">
-              
+
               <a href="https://github.com/<%= profile.username %>" target="_blank" class="username">@<%= profile.username %></a>
-              
+
               <% if profile.company %>
                 <span class="company"><%= profile.company %></span>
               <% end %>
@@ -121,7 +121,7 @@
               </div>
 
             <% end %>
-  
+
             <% if profile.latest_github_activity_at.present? %>
               <span class="latest-activity">pushed code <%= time_ago_in_words(profile.latest_github_activity_at) %> ago..</span>
             <% end %>
