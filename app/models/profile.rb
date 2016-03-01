@@ -22,6 +22,7 @@ class Profile < ActiveRecord::Base
 
     unless response['login'].blank?
       p response['login']
+      self.name = response['name']
       self.avatar_url = response['avatar_url']
       self.hireable = response['hireable']
       self.company = response['company']
@@ -40,7 +41,7 @@ class Profile < ActiveRecord::Base
   def self.create_from_github
     sort_options = ['followers', 'joined', 'repositories']
     directions = ['asc', 'desc']
-    
+
     page = 1
     directions.each do |direction|
       sort_options.each do |option|
@@ -69,9 +70,9 @@ class Profile < ActiveRecord::Base
         # next if profile.id < 100
         username = profile.username
         response = HTTParty.get(URI.encode("https://api.github.com/users/#{username}?client_id=#{@@client}&client_secret=#{@@secret}"))
-        
+
         p "response: #{response.inspect}"
-        
+
         unless response['login'].blank?
           p response['login']
           profile.avatar_url = response['avatar_url']
