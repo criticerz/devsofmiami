@@ -11,7 +11,7 @@ class Profile < ActiveRecord::Base
   has_one :code_wars_datum
 
   validates :username, uniqueness: true
-  after_create :update_profile_data
+  after_create :update_profile_data, :update_language_data
 
   @@client = ENV['DEV_GITHUB_CLIENT']
   @@secret = ENV['DEV_GITHUB_SECRET']
@@ -35,6 +35,24 @@ class Profile < ActiveRecord::Base
       self.github_created_at = response['created_at']
       self.save
       p "saved"
+    end
+  end
+
+  def update_language_data
+    username = self.username
+    response = HTTParty.get("https://api.github.com/users/#{username}/repos?client_id=#{@@client}&client_secret=#{@@secret}")
+
+    repos = JSON.parse(response.body)
+
+    repos.each do |repo|
+
+      language = repo['language']
+
+      unless language.blank?
+        find_language = Language.where(name: language).first_or_create()
+        profile_language = ProfileLanguage.where(profile_id: self.id, language_id: find_language.id).first_or_create
+        puts "added language"
+      end
     end
   end
 
