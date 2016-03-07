@@ -142,7 +142,7 @@ end
 
 task :import_stack_data => :environment do
   # we can automate getting this data later
-  CSV.foreach('stack_overflow_2_28_16.csv', :headers => true) do |row|
+  CSV.foreach('stack_overflow_030716.csv', :headers => true) do |row|
     begin
       p row["DisplayName"] + ": " + row["Reputation"]
       display_name = row["DisplayName"]
