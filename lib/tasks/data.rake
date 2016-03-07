@@ -165,12 +165,12 @@ task :find_matches => :environment do
   Profile.find_each do |profile|
     match_name = StackProfile.where(display_name: profile.name)
     match_username = StackProfile.where(display_name: profile.username)
-    if match_name.length == 1
+    if match_name.length >= 1
       p "display name: #{match_name.last.display_name}"
       p "profile name: #{profile.name}"
       match_name.last.profile_id = profile.id
       match_name.last.save
-    elsif match_username.length == 1
+    elsif match_username.length >= 1
       p "display name: #{match_username.last.display_name}"
       p "profile name: #{profile.username}"
       match_username.last.profile_id = profile.id
