@@ -22,8 +22,9 @@
         <% else %>
           <li><%= link_to 'Sign out', signout_path, class:"btn btn-link" %></li>
         <% end %>
-
-        <li><a href="#" data-toggle="modal" data-target="#connect-stack-overflow">Connect StackOverflow</a></li>
+        <% if current_user && current_user.admin %>
+          <li><a href="#" data-toggle="modal" data-target="#connect-stack-overflow">Connect StackOverflow</a></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
 
