@@ -8,6 +8,8 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/master/devicon.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script type='text/javascript' src='https://api.stackexchange.com/js/2.0/all.js'></script>
+
 
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
@@ -44,6 +46,18 @@
       </script>
 
     <% end %>
+
+  
+    <script type='text/javascript'>
+      SE.init({
+        clientId: '6688',
+        key: 'uXqroen1cc3pMoAjyeas6g((',
+        channelUrl: 'http://miamidevs.com/blank',
+        complete: function (data) { console.log('SO ready!', data) }
+      });
+    </script>
+
+    
 
   </body>
 </html>

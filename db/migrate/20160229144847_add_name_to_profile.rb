@@ -1,5 +1,7 @@
 class AddNameToProfile < ActiveRecord::Migration
   def change
-    add_column :profiles, :name, :string
+    unless column_exists? :profiles, :name
+      add_column :profiles, :name, :string
+    end
   end
 end
