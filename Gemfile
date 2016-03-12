@@ -11,32 +11,30 @@ gem 'httparty'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'meta-tags'
-
-group :development, :test do
-  gem 'byebug'
-  gem 'dotenv-rails'
-end
-group :development do
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-end
 gem 'bootstrap-sass'
 gem 'mysql2', '~> 0.3.18'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'puma'
+
+group :development, :test do
+  gem 'byebug'
+  gem 'dotenv-rails'
+  gem 'pry-rails'
+  gem 'pry-rescue'
+  gem 'rubocop'
+end
+
 group :development do
+  gem 'web-console', '~> 2.0'
+  gem 'spring'
   gem 'better_errors'
   gem 'foreman'
   gem 'hub', :require=>nil
   gem 'rails_layout'
   gem 'sqlite3'
 end
-group :development, :test do
-  gem 'pry-rails'
-  gem 'pry-rescue'
-  gem 'rubocop'
-end
+
 group :production do
   gem 'rails_12factor'
   # gem 'pg'

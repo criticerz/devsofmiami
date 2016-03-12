@@ -17,13 +17,14 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       
       <ul class="nav navbar-nav navbar-right">
-        
         <% if current_user.blank? %>
           <li><a href="#" data-toggle="modal" data-target="#become-a-member">Become a Member</a></li>
         <% else %>
           <li><%= link_to 'Sign out', signout_path, class:"btn btn-link" %></li>
         <% end %>
-
+        <% if current_user && current_user.admin %>
+          <li><a href="#" data-toggle="modal" data-target="#connect-stack-overflow">Connect StackOverflow</a></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
 
@@ -48,5 +49,59 @@
       </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="connect-stack-overflow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title text-center">Connect Stack Overflow</h3>
+          </div>
+
+          <div class="modal-body text-center">
+            <!-- <p>
+              Connect your Stack Overflow account.
+            </p> -->
+            <p>
+              <%= link_to "<i class='fa fa-stack-overflow'></i> Connect Stack Overflow".html_safe, "", class: "btn btn-sm btn-social btn-primary text-center js-stack-overflow-btn" %>
+            </p>
+            <br>
+          </div>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
   </div>
 </nav>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    SE.init({
+      clientId: '6688',
+      key: 'uXqroen1cc3pMoAjyeas6g((',
+      channelUrl: 'http://miamidevs.com/blank',
+      complete: function (data) { console.log('SO ready!', data) }
+    });
+
+    $('.js-stack-overflow-btn').on('click', function(){
+      SE.authenticate({
+        success: function(data) { 
+          alert(
+                'User Authorized with account id = ' + 
+                data.networkUsers[0].account_id + ', got access token = ' + 
+                data.accessToken
+            ); 
+        },
+        error: function(data) { 
+          alert('An error occurred:\n' + data.errorName + '\n' + data.errorMessage); 
+        },
+        scope: ['read_inbox'],
+        networkUsers: true
+      });
+    })
+  });
+</script>
