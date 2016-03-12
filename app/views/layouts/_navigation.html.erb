@@ -83,7 +83,7 @@
     SE.init({
       clientId: '6688',
       key: 'uXqroen1cc3pMoAjyeas6g((',
-      channelUrl: 'http://www.miamidevs.com',
+      channelUrl: 'www.miamidevs.com',
       complete: function (data) { console.log('SO ready!', data) }
     });
 
@@ -99,7 +99,7 @@
         error: function(data) { 
           alert('An error occurred:\n' + data.errorName + '\n' + data.errorMessage); 
         },
-        scope: ['read_inbox'],
+        // scope: ['read_inbox'],
         networkUsers: true
       });
     })
