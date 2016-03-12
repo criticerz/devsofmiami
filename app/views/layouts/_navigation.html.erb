@@ -22,7 +22,7 @@
         <% else %>
           <li><%= link_to 'Sign out', signout_path, class:"btn btn-link" %></li>
         <% end %>
-        <% if current_user && current_user.admin %>
+        <% if current_user && current_user.admin || Rails.env.development? %>
           <li><a href="#" data-toggle="modal" data-target="#connect-stack-overflow">Connect StackOverflow</a></li>
         <% end %>
       </ul>
@@ -83,7 +83,7 @@
     SE.init({
       clientId: '6688',
       key: 'uXqroen1cc3pMoAjyeas6g((',
-      channelUrl: 'http://www.miamidevs.com/blank',
+      channelUrl: 'http://www.miamidevs.com',
       complete: function (data) { console.log('SO ready!', data) }
     });
 
