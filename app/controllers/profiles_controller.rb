@@ -34,7 +34,6 @@ class ProfilesController < ApplicationController
 
     end
 
-    puts @profiles.first.inspect
   end
 
   # GET /profiles/1

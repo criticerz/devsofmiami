@@ -71,9 +71,9 @@ var App = React.createClass({
       url: '/profiles.json',
       dataType: 'json',
       data: data
-    }).done(function(profiles){
+    }).done(function(data){
 
-      _this.setState({ profiles: profiles, loadingState: false })
+      _this.setState({ profiles: data.profiles, loadingState: false })
 
     }).error(function(error) {
 
