@@ -16,6 +16,7 @@ gem 'mysql2', '~> 0.3.18'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'puma'
+gem 'react-rails'
 
 group :development, :test do
   gem 'byebug'
